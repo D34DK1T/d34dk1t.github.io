@@ -10,7 +10,7 @@ body {
 }
 
 .card:hover {
-    box-shadow: 0 0 4px #a1a1a1;
+    box-shadow: 0 0 4px #9b9a9a;
     transition: ease 0.2s;
 }
 
