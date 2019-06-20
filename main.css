@@ -19,15 +19,13 @@ body {
 }
 
 .card img {
-    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important;
+    box-shadow: 0 .125rem .25rem rgba(43, 42, 42, 0.562) !important;
     padding: 1rem !important;
     margin-bottom: 10px;
-    /* min-height: 365px;
-    max-height: 365px; */
     max-width: 100%;
 }
 
-.card-body {
+.card-main {
     padding: .75rem !important;
 }
 

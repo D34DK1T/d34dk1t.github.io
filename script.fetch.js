@@ -28,11 +28,11 @@ function apiSearch(event) {
                     <div class="col-12 col-md-4 col-xl-3 text-center cards">
                         <div class="card mb-3">
                             <a href="https://www.themoviedb.org/${item.media_type}/${item.id}">
-                            <img src="${imgItem}" class="card-img-top" alt="${nameItem}" title="${nameItem}">
+                            <img src="${imgItem}" class="card img" alt="${nameItem}" title="${nameItem}">
                             <b>${nameItem}</b></a>
-                            <div class="card-body">
-                                <p class="card-text"><span class="badge badge-primary">Рейтинг: ${ratingItem}</span></p>
-                                <p class="card-text text-primary">Дата выхода:<br/>${dataItem}</p>
+                            <div class="card-main">
+                                <p class="card-text text-primary">Дата релиза:<br/>${dataItem}</p>
+                                <p class="card-text"><span class="badge badge-primary">Оценка: ${ratingItem}</span></p>
                                 <a href="https://www.themoviedb.org/${item.media_type}/${item.id}" class="btn btn-primary">Смотреть</a>
                              </div>
                         </div>
@@ -42,7 +42,7 @@ function apiSearch(event) {
             movie.innerHTML = inner;
         })
         .catch(function (reason) {
-            movie.innerHTML = '<div class="alert alert-danger alert-dismissible fade show" role="alert">Упс, что-то пошло не так!</div>';
+            movie.innerHTML = 'Упс, что-то пошло не так!';
             console.log('ERROR: ' + reason.status);
         });
 }
