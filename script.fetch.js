@@ -33,7 +33,7 @@ function apiSearch(event) {
                             <div class="card-body">
                                 <p class="card-text"><span class="badge badge-primary">Рейтинг: ${ratingItem}</span></p>
                                 <p class="card-text text-primary">Дата выхода:<br/>${dataItem}</p>
-                                <a href="https://www.themoviedb.org/${item.media_type}/${item.id}" class="btn btn-primary">Подробнее</a>
+                                <a href="https://www.themoviedb.org/${item.media_type}/${item.id}" class="btn btn-primary">Смотреть</a>
                              </div>
                         </div>
                     </div>`;
