@@ -6,10 +6,16 @@ function apiSearch(event) {
     const searchText = document.querySelector('.form-control').value;
     const server = 'https://api.themoviedb.org/3/search/multi?api_key=b9f98b6393e5af877873aa7720d1822a&language=ru&query=' + searchText;
     movie.innerHTML = 'Загрузка..';
-    requestApi(server)
-        .then(function (result) {
-            const output = JSON.parse(result);
 
+    fetch(server)
+        .then(function (value) {
+            if(value.status !== 200){
+                return Promise.reject(new Error('ОШИБКА'));
+            }
+
+            return value.json();
+        })
+        .then(function (output) {
             let inner = '';
 
             output.results.forEach(function (item) {
@@ -35,62 +41,10 @@ function apiSearch(event) {
 
             movie.innerHTML = inner;
         })
-        .catch(function(reason){
-            movie.innerHTML = 'Ошибка O_O';
+        .catch(function (reason) {
+            movie.innerHTML = '<div class="alert alert-danger alert-dismissible fade show" role="alert">Упс, что-то пошло не так!</div>';
             console.log('ERROR: ' + reason.status);
         });
 }
 
 searchForm.addEventListener('submit', apiSearch);
-
-function requestApi(url) {
-    return new Promise(function (resolve, reject) {
-        const request = new XMLHttpRequest();
-        request.open('GET', url);
-
-        request.addEventListener('load', function () {
-            if (request.status !== 200) {
-                reject({
-                    status: request.status
-                });
-                return;
-            }
-
-            resolve(request.response);
-
-        });
-
-        request.addEventListener('error', function () {
-            reject({
-                status: request.status
-            });
-        });
-        request.send();
-    });
-}
-
-//     request.addEventListener('readystatechange', () => {
-//         if (request.readyState !== 4) {
-//             movie.innerHTML = 'Загрузка..';
-//             return;
-//         }
-
-//         if (request.status !== 200) {
-//             movie.innerHTML = 'Ошибка O_O';
-//             return;
-//         }
-//         const output = JSON.parse(request.responseText);
-//         console.log(output);
-//         let inner = '';
-
-//         output.results.forEach(function (item) {
-//             let nameItem = item.name || item.title;
-//             let firstairdate = item.first_air_date || item.release_date;
-
-//             inner += `<div class="col-12 col-md-4 col-xl-3">${nameItem} <br> Дата выхода: ${firstairdate}</div>`;
-//         });
-
-//         movie.innerHTML = inner;
-//     });
-
-// }

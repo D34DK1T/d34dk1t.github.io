@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" media="screen" title="style-default" href="main.css" />
+    <link type="text/css" rel="stylesheet" id="theme" href="theme1.css" />
     <title>DEADMOVIE</title>
 </head>
+
 <body>
-    
-    <nav class="navbar">
+    <nav class="navbar" id="header">
         <div class="container">
             <a href="index.html" class="navbar-brand">DEADMOVIE</a>
         </div>
@@ -29,6 +33,20 @@
         </div>
     </div>
 
-<script src="./script.js"></script>
+    <script src="./script.fetch.js"></script>
+    <script type="text/jаvascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/jаvascript" src="jquery.style-switcher.js"></script>
+    <div id="header">
+        <a href="jаvascript: void(0)" title="Сменить стиль" id="theme1">
+             <div style="display:inline-block;background: #999999; width:16px; height:16px; border:1px solid #fff;"></div>
+        </a> 
+        <a href="jаvascript: void(0)" title="Сменить стиль" id="theme2">
+             <div style="display:inline-block;background: #000; width:16px; height:16px; border:1px solid #fff;"></div>
+        </a>
+        <a href="jаvascript: void(0)" title="Сменить стиль" id="theme3">
+             <div style="display:inline-block;background: #0099ff; width:16px; height:16px; border:1px solid #fff;"></div>
+        </a>
+    </div>
 </body>
+
 </html>
