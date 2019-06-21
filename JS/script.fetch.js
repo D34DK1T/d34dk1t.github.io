@@ -98,14 +98,15 @@ function showFullInfo(){
         return value.json();
     })
     .then(function(output){
+        let mediaType = output.title ? 'movie' : 'tv';
         let genres = '';
-        output.genres.forEach((genre) => { genres += genre.name + ', '})
-        genres = genres.substr(0, genres.length - 2)
+        output.genres.forEach((genre) => { genres += genre.name + ', ';});
+        genres = genres.substr(0, genres.length - 2);
         movie.innerHTML = `
         
         <div class='col-4'>
             <img src='${urlposter + output.poster_path}' alt='${output.name || output.title}' class='infoposter'>
-            ${(output.imdb_id) ? `<p class='text-center'> <a class="infobutton" href='https://imdb.com/title/${output.homepage}' target='_blank'>Официальная страница</a> </p>` : ''}
+            ${(output.homepage) ? `<p class='text-center'> <a class="infobutton" href='https://imdb.com/title/${output.homepage}' target='_blank'>Официальная страница</a> </p>` : ''}
             ${(output.imdb_id) ? `<p class='text-center'> <a class="infobutton" href='https://imdb.com/title/${output.imdb_id}' target='_blank'>Страница на IMDB</a> </p>` : ''}
         </div>
         <div class='col-8 infofull'>
@@ -116,7 +117,11 @@ function showFullInfo(){
             <p class="text-center infotext">Жанры: ${genres}</p>
             ${(output.last_episode_to_air) ? `<p>Сезон: ${output.number_of_seasons} <br> Серий: ${output.last_episode_to_air.episode_number} </p>` : ''}
             <p class="text-center infotext">Описание: ${output.overview}</p>
+            <div class="youtube"></div>
             </div>`;
+
+            getVideo(mediaType, output.id);
+            
     })
     .catch(function(reason){
         movie.innerHTML = 'Упс, что-то пошло не так!';
@@ -181,3 +186,32 @@ document.addEventListener('DOMContentLoaded', function(){
         console.log('ERROR: ' + reason.status);
     });
 });
+
+function getVideo(type, id){
+    let youtube = movie.querySelector('.youtube');
+
+    fetch(`https://api.themoviedb.org/3/${type}/${id}/videos?api_key=b9f98b6393e5af877873aa7720d1822a&language=ru`)
+    .then(function(value){
+        if (value.status !== 200){
+            return Promise.reject(new Error(value.status));
+        }
+        return value.json();
+    })
+    .then(function(output){
+        let videoFrame = '<h4 class="col-12 text-center text-info">Трейлер</h4>';
+
+        if(output.results.length === 0){
+            videoFrame = '<p>Видео отсутствует</p>';
+        }
+
+        output.results.forEach((item)=>{
+            videoFrame +=  '<iframe width="560" height="315" src="https://www.youtube.com/embed/'+ item.key + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+        });
+
+        youtube.innerHTML = videoFrame;
+    })
+    .catch(function(reason){
+        youtube.innerHTML = "Видео отсутствует!";
+        console.error(reason || reason.status);
+    });
+}
