@@ -1,6 +1,6 @@
-const searchForm = document.querySelector('#search-form');
-const movie = document.querySelector('#movies');
-const urlposter = 'http://image.tmdb.org/t/p/w500';
+const searchForm = document.querySelector('#search-form'),
+      movie = document.querySelector('#movies'),
+      urlposter = 'http://image.tmdb.org/t/p/w500';
 
 function apiSearch(event){
     event.preventDefault();
@@ -26,12 +26,12 @@ function apiSearch(event){
             inner = '<h2 class="col-12 text-center text-danger moviealert lightalert">Не найдено</h2>';
         }
         output.results.forEach(function(item){
-            let nameItem = item.name || item.title;
-            let ratingItem = item.vote_average;
-            let dateItem = item.first_air_date || item.release_date || 'НЕИЗВЕСТНА';
-            let poster = item.poster_path ? urlposter + item.poster_path : '../img/noposter.png';
-            let dataInfo = '';
-            let infotype = '';
+            let nameItem = item.name || item.title,
+                ratingItem = item.vote_average,
+                dateItem = item.first_air_date || item.release_date || 'НЕИЗВЕСТНА',
+                poster = item.poster_path ? urlposter + item.poster_path : '../img/noposter.png',
+                dataInfo = '',
+                infotype = '';
             
             if (item.media_type === 'movie') {
                 infotype = 'ФИЛЬМ';
@@ -98,7 +98,11 @@ function showFullInfo(){
         return value.json();
     })
     .then(function(output){
+        let genres = '';
+        output.genres.forEach((genre) => { genres += genre.name + ', '})
+        genres = genres.substr(0, genres.length - 2)
         movie.innerHTML = `
+        
         <div class='col-4'>
             <img src='${urlposter + output.poster_path}' alt='${output.name || output.title}' class='infoposter'>
             ${(output.imdb_id) ? `<p class='text-center'> <a class="infobutton" href='https://imdb.com/title/${output.homepage}' target='_blank'>Официальная страница</a> </p>` : ''}
@@ -109,6 +113,7 @@ function showFullInfo(){
             <p class="text-center infotext">Оценка: ${output.vote_average}</p>
             <p class="text-center infotext"> Статус: ${output.status}</p>
             <p class="text-center infotext"> Премьера: ${output.first_air_date || output.release_date}</p>
+            <p class="text-center infotext">Жанры: ${genres}</p>
             ${(output.last_episode_to_air) ? `<p>Сезон: ${output.number_of_seasons} <br> Серий: ${output.last_episode_to_air.episode_number} </p>` : ''}
             <p class="text-center infotext">Описание: ${output.overview}</p>
             </div>`;
