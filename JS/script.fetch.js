@@ -101,8 +101,8 @@ function showFullInfo(){
         movie.innerHTML = `
         <div class='col-4'>
             <img src='${urlposter + output.poster_path}' alt='${output.name || output.title}' class='infoposter'>
-            ${(output.imdb_id) ? `<p class='text-center'> <a href='https://imdb.com/title/${output.imdb_id}' target='_blank'>Официальная страница</a> </p>` : ''}
-            ${(output.imdb_id) ? `<p class='text-center'> <a href='https://imdb.com/title/${output.imdb_id}' target='_blank'>Страница на IMDB</a> </p>` : ''}
+            ${(output.imdb_id) ? `<p class='text-center'> <a class="infobutton" href='https://imdb.com/title/${output.homepage}' target='_blank'>Официальная страница</a> </p>` : ''}
+            ${(output.imdb_id) ? `<p class='text-center'> <a class="infobutton" href='https://imdb.com/title/${output.imdb_id}' target='_blank'>Страница на IMDB</a> </p>` : ''}
         </div>
         <div class='col-8 infofull'>
             <h4 class='col-12 text-center text-info infocaption'>${output.name || output.title}</h4>
@@ -110,8 +110,8 @@ function showFullInfo(){
             <p class="text-center infotext"> Статус: ${output.status}</p>
             <p class="text-center infotext"> Премьера: ${output.first_air_date || output.release_date}</p>
             ${(output.last_episode_to_air) ? `<p>Сезон: ${output.number_of_seasons} <br> Серий: ${output.last_episode_to_air.episode_number} </p>` : ''}
-        </div>`;
-
+            <p class="text-center infotext">Описание: ${output.overview}</p>
+            </div>`;
     })
     .catch(function(reason){
         movie.innerHTML = 'Упс, что-то пошло не так!';

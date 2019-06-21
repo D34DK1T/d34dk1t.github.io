@@ -150,3 +150,18 @@ hr {
     background: #301ed4;
     font-size: 18px;
 }
+
+.infobutton {
+    margin: 0 auto;
+    background-color: #473bb8 !important;
+    width: 100%;
+    color: white !important;
+    padding: 3px;
+    border-radius: 5px;
+}
+
+.infobutton:hover {
+    background-color: #3d2fc2 !important;
+    color: white !important;
+    text-decoration: none;
+}
