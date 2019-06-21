@@ -133,7 +133,7 @@ hr {
 }
 
 .infofull {
-    border: 1px dashed #473bb9;
+    /* border: 1px dashed #473bb9; */
     border-radius: 20px;
     width: 100%;
     height: 550px;
